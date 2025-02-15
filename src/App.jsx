@@ -18,20 +18,18 @@ export const goods = [
 
 export const App = () => {
   const [value, setValue] = useState('Jam');
-  const [isHidden, setIsHidden] = useState(false);
 
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
         {value ? `${value} is selected` : 'No goods selected'}
-        {!isHidden && (
+        {value && (
           <button
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
             onClick={() => {
-              setIsHidden(true);
-              setValue(null);
+              setValue('');
             }}
           />
         )}
@@ -54,15 +52,7 @@ export const App = () => {
                   className={classNames('button', {
                     'is-info': good === value,
                   })}
-                  onClick={() => {
-                    if (good === value) {
-                      setValue(null);
-                      setIsHidden(true);
-                    } else {
-                      setValue(good);
-                      setIsHidden(false);
-                    }
-                  }}
+                  onClick={() => setValue(good === value ? '' : good)}
                 >
                   {good === value ? '-' : '+'}
                 </button>
